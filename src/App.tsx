@@ -9,6 +9,8 @@ import { OAuthProvider } from "@/contexts/OAuthContext";
 import Layout from "@/components/Layout";
 import Login from "@/pages/Login";
 import Dashboard from "@/pages/Dashboard";
+import GmailConnection from "@/pages/GmailConnection";
+import SlackIntegration from "@/pages/SlackIntegration";
 import Emails from "@/pages/Emails";
 import Settings from "@/pages/Settings";
 import OAuthCallback from "@/pages/OAuthCallback";
@@ -39,6 +41,8 @@ const App = () => (
               }>
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/emails" element={<Emails />} />
+                <Route path="/gmail" element={<GmailConnection />} />
+                <Route path="/slack" element={<SlackIntegration />} />
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/" element={<Navigate to="/dashboard" replace />} />
               </Route>
