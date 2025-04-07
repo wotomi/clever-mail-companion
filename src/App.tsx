@@ -1,4 +1,5 @@
 
+import React from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -17,44 +18,49 @@ import OAuthCallback from "@/pages/OAuthCallback";
 import NotFound from "@/pages/NotFound";
 import RequireAuth from "@/components/RequireAuth";
 
+// Create a new QueryClient instance
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <AuthProvider>
-      <OAuthProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <Routes>
-              <Route path="/login" element={<Login />} />
-              <Route path="/oauth/callback" element={<OAuthCallback />} />
-              
-              {/* Protected Routes */}
-              <Route element={
-                <RequireAuth>
-                  <Layout>
-                    <Outlet />
-                  </Layout>
-                </RequireAuth>
-              }>
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/emails" element={<Emails />} />
-                <Route path="/gmail" element={<GmailConnection />} />
-                <Route path="/slack" element={<SlackIntegration />} />
-                <Route path="/settings" element={<Settings />} />
-                <Route path="/" element={<Navigate to="/dashboard" replace />} />
-              </Route>
-              
-              {/* 404 Page */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
-        </TooltipProvider>
-      </OAuthProvider>
-    </AuthProvider>
-  </QueryClientProvider>
-);
+const App = () => {
+  return (
+    <React.StrictMode>
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <OAuthProvider>
+            <TooltipProvider>
+              <Toaster />
+              <Sonner />
+              <BrowserRouter>
+                <Routes>
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/oauth/callback" element={<OAuthCallback />} />
+                  
+                  {/* Protected Routes */}
+                  <Route element={
+                    <RequireAuth>
+                      <Layout>
+                        <Outlet />
+                      </Layout>
+                    </RequireAuth>
+                  }>
+                    <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/emails" element={<Emails />} />
+                    <Route path="/gmail" element={<GmailConnection />} />
+                    <Route path="/slack" element={<SlackIntegration />} />
+                    <Route path="/settings" element={<Settings />} />
+                    <Route path="/" element={<Navigate to="/dashboard" replace />} />
+                  </Route>
+                  
+                  {/* 404 Page */}
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </BrowserRouter>
+            </TooltipProvider>
+          </OAuthProvider>
+        </AuthProvider>
+      </QueryClientProvider>
+    </React.StrictMode>
+  );
+};
 
 export default App;
