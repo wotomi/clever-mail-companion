@@ -30,7 +30,13 @@ const App = () => (
               <Route path="/oauth/callback" element={<OAuthCallback />} />
               
               {/* Protected Routes */}
-              <Route element={<RequireAuth><Layout /></RequireAuth>}>
+              <Route element={
+                <RequireAuth>
+                  <Layout>
+                    {/* Layout now receives children */}
+                  </Layout>
+                </RequireAuth>
+              }>
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/emails" element={<Emails />} />
                 <Route path="/settings" element={<Settings />} />
